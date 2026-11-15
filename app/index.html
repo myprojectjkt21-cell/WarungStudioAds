@@ -4,6 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
   <title>WARUNGADS STUDIO PRO™ v6.0 — AI Food Photo & Video Ad Engine (Full PWA)</title>
+  // KONFIGURASI GERBANG BAYAR SUPABASE WARUNGADS PRO
+const SUPABASE_URL = "https://ddvzzbglqbngyrexdbno.supabase.co";
+const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkdnp6YmdscWJuZ3lyZXhkYm5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3MjQyOTEsImV4cCI6MjExMDMwMDI5MX0.79mOViRP_Id_zPjSBak-beEAYUYBxlqaQn2ncwmQ6_c
+;
+
+async function cekLisensiSupabase(inputKode) {
+  const cleanCode = inputKode.replace(/^Order ID:\s*/i, "").replace(/^#+/, "").trim().toUpperCase();
+
+  // 1. Cek Master Key Owner (Tetap bisa masuk meski sedang offline)
+  if (["MASTER-OWNER-2026", "DEV-WARUNGADS-MASTER"].includes(cleanCode)) {
+    return { valid: true, buyerName: "Owner VIP", code: cleanCode };
+  }
+
+  // 2. Cek ke Tabel warungads_licenses di Supabase via REST API
+  const url = `${SUPABASE_URL}/rest/v1/warungads_licenses?order_id=eq.${encodeURIComponent(cleanCode)}&select=order_id,buyer_name,payment_status,is_active`;
+  
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error("Gagal menghubungi server lisensi. Periksa koneksi internet Anda.");
+  }
+
+  const data = await response.json();
+  if (data && data.length > 0 && data[0].is_active) {
+    return {
+      valid: true,
+      buyerName: data[0].buyer_name || "Member VIP",
+      code: data[0].order_id
+    };
+  }
+
+  return { valid: false, message: "Order ID belum terdaftar atau pembayaran belum lunas." };
+}
   <meta name="description" content="Sulap Foto HP Kusam Jadi Poster & Video Iklan Kuliner Kelas Dunia dalam 3 Detik. Dilengkapi Meta Ads Safe Zone, Skor CRO & Kalkulator Anti Boncos Ojol.">
   <meta name="theme-color" content="#090a0f">
   <meta name="mobile-web-app-capable" content="yes">
