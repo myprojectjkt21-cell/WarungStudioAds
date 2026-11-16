@@ -19,9 +19,14 @@ module.exports = async (req, res) => {
 
     await fetch(`${URL}/rest/v1/orders`, {
       method: 'POST', headers,
-      body: JSON.stringify({ order_id, customer_name, customer_phone, customer_email, product_name: 'WARUNGADS STUDIO PRO v6.0', amount, status, payment_method: data.payment_method || null, raw: body })
-    });
-
+      body: JSON.stringify({ 
+  buyer_name: customer_name, 
+  buyer_phone: customer_phone, 
+  buyer_email: customer_email, 
+  license_key, 
+  status: 'active', 
+  order_id 
+})
     if (status === 'paid' && customer_phone) {
       const license_key = 'WARUNGADS-' + Math.random().toString(36).slice(2,8).toUpperCase();
       await fetch(`${URL}/rest/v1/warungads_licenses`, {
