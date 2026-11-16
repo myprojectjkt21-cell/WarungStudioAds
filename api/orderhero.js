@@ -17,36 +17,16 @@ module.exports = async (req, res) => {
     const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
     const headers = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' };
 
-    // 1. Simpan ke orders - pakai nama kolom ASLI kamu
-    const orderRes = await fetch(`${URL}/rest/v1/orders`, {
+    await fetch(`${URL}/rest/v1/orders`, {
       method: 'POST', headers,
-      body: JSON.stringify({
-        order_id,
-        customer_name,
-        customer_phone,
-        customer_email,
-        product_name: 'WARUNGADS STUDIO PRO v6.0',
-        amount,
-        status,
-        raw: body
-      })
+      body: JSON.stringify({ order_id, customer_name, customer_phone, customer_email, product_name: 'WARUNGADS STUDIO PRO v6.0', amount, status, payment_method: data.payment_method || null, raw: body })
     });
-    const orderLog = await orderRes.text();
-    console.log('ORDER INSERT:', orderRes.status, orderLog);
 
-    // 2. Kalau PAID, masukkan ke vip_members
     if (status === 'paid' && customer_phone) {
       const license_key = 'WARUNGADS-' + Math.random().toString(36).slice(2,8).toUpperCase();
-      await fetch(`${URL}/rest/v1/vip_members`, {
+      await fetch(`${URL}/rest/v1/warungads_licenses`, {
         method: 'POST', headers,
-        body: JSON.stringify({
-          whatsapp: customer_phone,
-          email: customer_email,
-          name: customer_name,
-          license_key,
-          status: 'active',
-          order_id
-        })
+        body: JSON.stringify({ whatsapp: customer_phone, email: customer_email, name: customer_name, license_key, status: 'active', order_id })
       });
     }
 
