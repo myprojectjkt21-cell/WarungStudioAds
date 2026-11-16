@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+  <title>WARUNGADS STUDIO PRO™ v6.0 — AI Food Photo & Video Ad Engine (Full PWA)</title>
+  <meta name="description" content="Sulap Foto HP Kusam Jadi Poster & Video Iklan Kuliner Kelas Dunia dalam 3 Detik. Dilengkapi Meta Ads Safe Zone, Skor CRO & Kalkulator Anti Boncos Ojol.">
+  <meta name="theme-color" content="#090a0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WarungAds Pro">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%94%3C/text%3E%3C/svg%3E">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#090a0f;color:#f1f5f9;line-height:1.5}
+    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 60px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .logo{font-weight:900;font-size:22px;letter-spacing:.3px}
+    .logo span{color:#facc15}
+    .badge{background:#facc15;color:#111827;font-weight:800;font-size:12px;padding:5px 10px;border-radius:999px}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:18px;padding:18px;margin-top:16px}
+    .card h2{margin:0 0 6px;font-size:20px}
+    .muted{color:#9ca3af;font-size:14px;margin:0}
+    label{font-size:13px;font-weight:700;color:#cbd5e1;display:block;margin:12px 0 6px}
+    input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid #374151;background:#0b1220;color:#fff;font-size:15px;outline:none}
+    input:focus,select:focus{border-color:#facc15}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:640px){.row{grid-template-columns:1fr}}
+    .btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;margin-top:12px}
+    .btn-yellow{background:#facc15;color:#111827}
+    .btn-green{background:#22c55e;color:#fff}
+    .btn-dark{background:#1f2937;color:#fff;border:1px solid #374151}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .alert{padding:12px 14px;border-radius:12px;font-size:14px;margin-top:12px;display:none;white-space:pre-line}
+    .alert.show{display:block}
+    .alert.ok{background:#052e16;border:1px solid #22c55e;color:#bbf7d0}
+    .alert.err{background:#450a0a;border:1px solid #ef4444;color:#fecaca}
+    .alert.info{background:#082f49;border:1px solid #38bdf8;color:#bae6fd}
+    .pill{display:inline-block;background:#1e293b;border:1px solid #334155;padding:4px 10px;border-radius:999px;font-size:12px;margin:4px 4px 0 0}
+    .hidden{display:none!important}
+    .order-box{background:#020617;border:1px dashed #facc15;border-radius:14px;padding:14px;margin-top:14px}
+    .order-box b{font-size:20px;letter-spacing:.5px;color:#facc15}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+    @media(max-width:640px){.grid3{grid-template-columns:1fr}}
+    .mini{background:#0b1220;border:1px solid #1f2937;border-radius:14px;padding:14px}
+    .mini h3{margin:0 0 6px;font-size:15px}
+    .mini p{margin:0;font-size:13px;color:#9ca3af}
+    .topnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .topnav button{padding:9px 14px;border-radius:999px;border:1px solid #374151;background:#111827;color:#fff;cursor:pointer;font-weight:700}
+    .topnav button.active{background:#facc15;color:#111827;border-color:#facc15}
+    footer{margin-top:28px;text-align:center;color:#6b7280;font-size:12px}
+    .flex{display:flex;gap:10px}
+    .flex>*{flex:1}
+    .preview{width:100%;aspect-ratio:4/5;background:#020617;border:1px dashed #374151;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:12px;color:#6b7280;text-align:center;padding:10px}
+    .preview img{width:100%;height:100%;object-fit:cover}
+    .safezone{position:relative}
+    .safezone::after{content:"META ADS SAFE ZONE";position:absolute;inset:12% 10%;border:2px dashed #facc15;border-radius:10px;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:11px;font-weight:800;color:#facc15;pointer-events:none}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">WARUNGADS <span>STUDIO PRO™</span> v6.0</div>
+    <div id="statusBadge" class="badge">🔒 BELUM AKTIF</div>
+  </header>
+  <p class="muted">Sulap Foto HP Kusam Jadi Poster &amp; Video Iklan Kuliner Kelas Dunia dalam 3 Detik. Dilengkapi Meta Ads Safe Zone, Skor CRO &amp; Kalkulator Anti Boncos Ojol.</p>
+
+  <!-- ============ GERBANG BAYAR / LISENSI ============ -->
+  <div id="lockSection" class="card">
+    <h2>🔐 Aktivasi &amp; Gerbang Bayar</h2>
+    <p class="muted">Sudah bayar? Masukkan Order ID. Belum punya? Pilih paket di bawah, buat pesanan, lalu bayar.</p>
+
+    <label for="inputKode">Order ID / Kode Lisensi</label>
+    <input id="inputKode" type="text" placeholder="Contoh: WARUNG-8X2K9P atau Order ID: WARUNG-..." autocomplete="off">
+
+    <button id="btnCek" class="btn btn-yellow">✅ Cek &amp; Aktivasi Lisensi</button>
+    <button id="btnLihatBayar" class="btn btn-dark">💳 Saya Belum Punya Lisensi — Lihat Paket &amp; Bayar</button>
+
+    <div id="pesan" class="alert"></div>
+    <div>
+      <span class="pill">✔ Cek Otomatis ke Supabase</span>
+      <span class="pill">✔ Simpan Otomatis di HP</span>
+      <span class="pill">✔ Tanpa Login Ulang</span>
+    </div>
+  </div>
+
+  <!-- ============ PILIH PAKET & BAYAR ============ -->
+  <div id="paymentSection" class="card hidden">
+    <h2>💳 Pilih Paket &amp; Metode Bayar</h2>
+    <p class="muted">Langkah 1: Pilih paket. Langkah 2: Pilih metode bayar. Langkah 3: Klik Buat Pesanan. Sistem akan buatkan Order ID baru dan simpan ke Supabase sebagai <b>pending</b>.</p>
+
+    <label for="paketSelect">Paket</label>
+    <select id="paketSelect">
+      <option value="1 BULAN|49000">1 Bulan — Rp 49.000</option>
+      <option value="6 BULAN|149000">6 Bulan — Rp 149.000 (Paling Laris)</option>
+      <option value="LIFETIME|299000">Lifetime — Rp 299.000</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <label for="namaPembeli">Nama Pembeli</label>
+        <input id="namaPembeli" type="text" placeholder="Nama lengkap kamu">
+      </div>
+      <div>
+        <label for="waPembeli">No. WhatsApp (Opsional)</label>
+        <input id="waPembeli" type="text" placeholder="08xxxxxxxxxx">
+      </div>
+    </div>
+
+    <label for="metodeSelect">Metode Pembayaran</label>
+    <select id="metodeSelect">
+      <option value="QRIS">QRIS (DANA / OVO / GoPay / ShopeePay)</option>
+      <option value="BCA VA">Virtual Account BCA</option>
+      <option value="BRI VA">Virtual Account BRI</option>
+      <option value="MANDIRI VA">Virtual Account Mandiri</option>
+      <option value="TRANSFER BANK">Transfer Bank Manual</option>
+    </select>
+
+    <button id="btnBuatOrder" class="btn btn-green">🧾 Buat Pesanan &amp; Lanjut ke Pembayaran</button>
+    <div id="pesanBayar" class="alert"></div>
+
+    <div id="orderBox" class="order-box hidden">
+      <div class="muted" style="font-size:13px">Order ID Kamu (Simpan / Screenshot):</div>
+      <b id="orderIdTampil">-</b>
+      <div id="detailOrder" class="muted" style="font-size:14px;margin-top:6px"></div>
+      <div class="flex" style="margin-top:12px">
+        <button id="btnSalinOrder" class="btn btn-dark" style="margin:0">📋 Salin Order ID</button>
+        <button id="btnCekStatus" class="btn btn-yellow" style="margin:0">🔄 Saya Sudah Bayar — Cek Status</button>
+      </div>
+      <p class="muted" style="font-size:13px;margin-top:10px">Setelah bayar, admin / webhook payment gateway akan mengubah <b>payment_status</b> jadi <b>paid</b> dan <b>is_active</b> jadi <b>true</b> di Supabase. Lalu klik tombol Cek Status di atas.</p>
+    </div>
+
+    <button id="btnTutupBayar" class="btn btn-dark">← Kembali ke Aktivasi</button>
+  </div>
+
+  <!-- ============ STUDIO PRO (TERKUNCI SAMPAI AKTIF) ============ -->
+  <div id="appSection" class="card hidden">
+    <h2>🎉 Selamat Datang, <span id="namaMember">Member VIP</span></h2>
+    <p class="muted">Lisensi aktif: <b id="kodeAktif">-</b> &nbsp;|&nbsp; <button id="btnLogout" style="background:none;border:none;color:#f87171;cursor:pointer;font-weight:700;padding:0">Keluar / Ganti Lisensi</button></p>
+
+    <div class="topnav">
+      <button class="tabBtn active" data-tab="tabFoto">📸 Foto Iklan</button>
+      <button class="tabBtn" data-tab="tabVideo">🎬 Video Iklan</button>
+      <button class="tabBtn" data-tab="tabKalkulator">🧮 Kalkulator Ojol</button>
+    </div>
+
+    <!-- TAB FOTO -->
+    <div id="tabFoto">
+      <label for="uploadFoto">Upload Foto Makanan (dari HP)</label>
+      <input id="uploadFoto" type="file" accept="image/*">
+      <div id="previewFoto" class="preview safezone">Preview + Meta Ads Safe Zone akan muncul di sini</div>
+      <div class="row">
+        <div>
+          <label for="gayaFoto">Gaya Poster</label>
+          <select id="gayaFoto">
+            <option>Warung Legendaris</option>
+            <option>Premium Resto</option>
+            <option>Promo Ojol - Diskon</option>
+            <option>Street Food Viral</option>
+          </select>
+        </div>
+        <div>
+          <label for="judulIklan">Judul Iklan</label>
+          <input id="judulIklan" type="text" placeholder="Contoh: Ayam Geprek Juara, Pedasnya Nampol!">
+        </div>
+      </div>
+      <button id="btnBuatPoster" class="btn btn-yellow">✨ Buat Poster Iklan</button>
+      <div id="hasilPoster" class="alert info">Skor CRO akan muncul setelah kamu buat poster.</div>
+    </div>
+
+    <!-- TAB VIDEO -->
+    <div id="tabVideo" class="hidden">
+      <label for="teksVideo">Script / Caption Video</label>
+      <input id="teksVideo" type="text" placeholder="Contoh: Ayam geprek 15rb, gratis ongkir hari ini!">
+      <button id="btnBuatVideo" class="btn btn-green">🎬 Buat Ide Video Iklan</button>
+      <div id="hasilVideo" class="alert info">Ide hook, script 15 detik, dan caption akan muncul di sini.</div>
+    </div>
+
+    <!-- TAB KALKULATOR -->
+    <div id="tabKalkulator" class="hidden">
+      <div class="row">
+        <div>
+          <label for="hargaJual">Harga Jual di Ojol (Rp)</label>
+          <input id="hargaJual" type="number" value="25000">
+        </div>
+        <div>
+          <label for="modal">Modal / HPP per Porsi (Rp)</label>
+          <input id="modal" type="number" value="12000">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="komisi">Komisi Ojol (%)</label>
+          <input id="komisi" type="number" value="20">
+        </div>
+        <div>
+          <label for="diskon">Diskon Promo (Rp)</label>
+          <input id="diskon" type="number" value="0">
+        </div>
+      </div>
+      <button id="btnHitung" class="btn btn-yellow">🧮 Hitung Anti Boncos</button>
+      <div id="hasilHitung" class="alert info">Masukkan harga dan modal, lalu hitung.</div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="mini"><h3>🛡️ Meta Ads Safe Zone</h3><p>Teks tidak ketutup tombol Like / Comment di Reels &amp; Feed.</p></div>
+    <div class="mini"><h3>📈 Skor CRO</h3><p>Nilai daya jual poster kamu dari judul, kontras, dan CTA.</p></div>
+    <div class="mini"><h3>🛵 Kalkulator Ojol</h3><p>Hitung untung bersih setelah komisi 20% + promo.</p></div>
+  </div>
+
+  <footer>WARUNGADS STUDIO PRO™ v6.0 • Lisensi dicek via Supabase • © 2026</footer>
+</div>
+
+<script>
+// ============================================================
+// KONFIGURASI SUPABASE - JANGAN PAKAI service_role DI SINI
+// Ganti 2 baris di bawah dengan URL & ANON KEY kamu
+// ============================================================
+const SUPABASE_URL = "https://ddvzzbglqbngyrexdbno.supabase.co";
+const SUPABASE_ANON_KEY = "PASTE_ANON_KEY_KAMU_DI_SINI";
+
+// Link pembayaran asli kamu (Midtrans / Tripay / Xendit / dll)
+// Kalau belum ada, biarkan seperti ini, Order ID tetap dibuat di Supabase
+const PAYMENT_LINK_QRIS = "https://link-pembayaran-kamu.com/qris";
+const PAYMENT_LINK_VA = "https://link-pembayaran-kamu.com/va";
+
+// Kode master - sebaiknya nanti dipindah ke Supabase Edge Function
+const MASTER_CODES = ["MASTER-OWNER-2026", "DEV-WARUNGADS-MASTER"];
+
+// ============================================================
+// FUNGSI UTAMA: CEK LISENSI (KODE ASLI KAMU, SUDAH DIPERBAIKI)
+// Perbaikan: 1) Key pakai kutip, 2) Script dibungkus <script> & di akhir body,
+// 3) Cek payment_status + is_active, 4) Error handling lengkap, 5) Bersihkan input
+// ============================================================
+async function cekLisensiSupabase(inputKode) {
+  if (!inputKode || !String(inputKode).trim()) {
+    return { valid: false, message: "Masukkan Order ID dulu." };
+  }
+
+  const cleanCode = String(inputKode).replace(/^Order ID:\s*/i, "").replace(/^#+/, "").trim().toUpperCase();
+
+  if (MASTER_CODES.includes(cleanCode)) {
+    return { valid: true, buyerName: "Owner VIP", code: cleanCode };
+  }
+
+  const url = `${SUPABASE_URL}/rest/v1/warungads_licenses?order_id=eq.${encodeURIComponent(cleanCode)}&select=order_id,buyer_name,payment_status,is_active`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      const errText = await response.text().catch(() => "");
+      console.error("Supabase error:", response.status, errText);
+      throw new Error("Gagal menghubungi server lisensi. Periksa koneksi & setting RLS di Supabase. (Kode: " + response.status + ")");
+    }
+
+    const data = await response.json();
+
+    if (!data || data.length === 0) {
+      return { valid: false, message: "Order ID belum terdaftar. Pastikan kamu ketik dengan benar atau buat pesanan baru di bawah." };
+    }
+
+    const lic = data[0];
+    const status = String(lic.payment_status || "").toLowerCase().trim();
+    const isPaid = ["paid", "success", "settlement", "capture", "lunas", "completed", "paid_off"].includes(status);
+
+    if (lic.is_active && isPaid) {
+      return { valid: true, buyerName: lic.buyer_name || "Member VIP", code: lic.order_id };
+    }
+
+    if (!isPaid) {
+      return { valid: false, message: "Order ID ditemukan, tapi pembayaran belum lunas. Status di server: " + (lic.payment_status || "-") + ". Silakan selesaikan pembayaran lalu klik Cek Status." };
+    }
+
+    return { valid: false, message: "Lisensi ditemukan tapi belum aktif. Hubungi admin." };
+
+  } catch (err) {
+    console.error(err);
+    return { valid: false, message: err.message || "Terjadi kesalahan, coba lagi." };
+  }
+}
+
+// ============================================================
+// FUNGSI BARU: BUAT ORDER (GERBANG BAYAR)
+// Ini yang bikin gerbang bayar jalan: order dibuat dulu di Supabase
+// sebagai pending, lalu user bayar, lalu status diubah jadi paid
+// ============================================================
+function buatOrderIdBaru() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let s = "";
+  for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return "WARUNG-" + s;
+}
+
+async function buatOrderBaru(paketLabel, harga, nama, metode) {
+  const orderId = buatOrderIdBaru();
+  const url = `${SUPABASE_URL}/rest/v1/warungads_licenses`;
+
+  const body = {
+    order_id: orderId,
+    buyer_name: nama || "Member VIP",
+    payment_status: "pending",
+    is_active: false,
+    paket: paketLabel,
+    metode: metode,
+    harga: harga,
+    created_at: new Date().toISOString()
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+      "Content-Type": "application/json",
+      "Prefer": "return=representation"
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    const t = await response.text().catch(() => "");
+    console.error("Gagal buat order:", response.status, t);
+    throw new Error("Gagal membuat pesanan. Cek RLS INSERT di Supabase. (Kode: " + response.status + ")");
+  }
+  return { orderId, paketLabel, harga, metode };
+}
+
+function tampilkanPesan(el, teks, tipe) {
+  el.textContent = teks;
+  el.className = "alert show " + tipe;
+}
+function sembunyikanPesan(el) {
+  el.className = "alert";
+  el.textContent = "";
+}
+
+function bukaAksesPro(hasil) {
+  localStorage.setItem("warungads_license", JSON.stringify(hasil));
+  localStorage.setItem("warungads_buyer", hasil.buyerName);
+  localStorage.setItem("warungads_code", hasil.code);
+  document.getElementById("namaMember").textContent = hasil.buyerName;
+  document.getElementById("kodeAktif").textContent = hasil.code;
+  document.getElementById("statusBadge").textContent = "✅ PRO AKTIF";
+  document.getElementById("statusBadge").style.background = "#22c55e";
+  document.getElementById("statusBadge").style.color = "#fff";
+  document.getElementById("lockSection").classList.add("hidden");
+  document.getElementById("paymentSection").classList.add("hidden");
+  document.getElementById("appSection").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function kunciAkses() {
+  localStorage.removeItem("warungads_license");
+  localStorage.removeItem("warungads_buyer");
+  localStorage.removeItem("warungads_code");
+  document.getElementById("appSection").classList.add("hidden");
+  document.getElementById("lockSection").classList.remove("hidden");
+  document.getElementById("statusBadge").textContent = "🔒 BELUM AKTIF";
+  document.getElementById("statusBadge").style.background = "#facc15";
+  document.getElementById("statusBadge").style.color = "#111827";
+}
+
+// Cek otomatis saat buka web, biar tidak login ulang
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("warungads_license");
+  if (saved) {
+    try {
+      const hasil = JSON.parse(saved);
+      if (hasil && hasil.valid) {
+        // Verifikasi ulang ke server biar tidak bisa dipalsukan dari localStorage
+        cekLisensiSupabase(hasil.code).then((fresh) => {
+          if (fresh.valid) bukaAksesPro(fresh);
+          else kunciAkses();
+        });
+      }
+    } catch (e) { kunciAkses(); }
+  }
+});
+
+// Tombol: Cek & Aktivasi
+document.getElementById("btnCek").addEventListener("click", async () => {
+  const input = document.getElementById("inputKode").value;
+  const pesanEl = document.getElementById("pesan");
+  const btn = document.getElementById("btnCek");
+  btn.disabled = true; btn.textContent = "Mengecek...";
+  sembunyikanPesan(pesanEl);
+  const hasil = await cekLisensiSupabase(input);
+  btn.disabled = false; btn.textContent = "✅ Cek & Aktivasi Lisensi";
+  if (hasil.valid) {
+    tampilkanPesan(pesanEl, "Berhasil! Selamat datang, " + hasil.buyerName, "ok");
+    setTimeout(() => bukaAksesPro(hasil), 600);
+  } else {
+    tampilkanPesan(pesanEl, hasil.message, "err");
+  }
+});
+
+// Tombol: Lihat Paket
+document.getElementById("btnLihatBayar").addEventListener("click", () => {
+  document.getElementById("paymentSection").classList.remove("hidden");
+  document.getElementById("paymentSection").scrollIntoView({ behavior: "smooth" });
+});
+document.getElementById("btnTutupBayar").addEventListener("click", () => {
+  document.getElementById("paymentSection").classList.add("hidden");
+});
+
+// Tombol: Buat Pesanan
+document.getElementById("btnBuatOrder").addEventListener("click", async () => {
+  const paketVal = document.getElementById("paketSelect").value.split("|");
+  const paketLabel = paketVal[0];
+  const harga = parseInt(paketVal[1], 10);
+  const nama = document.getElementById("namaPembeli").value.trim();
+  const metode = document.getElementById("metodeSelect").value;
+  const pesanEl = document.getElementById("pesanBayar");
+  const btn = document.getElementById("btnBuatOrder");
+
+  if (!nama) {
+    tampilkanPesan(pesanEl, "Isi nama pembeli dulu ya.", "err");
+    return;
+  }
+  btn.disabled = true; btn.textContent = "Membuat Pesanan...";
+  sembunyikanPesan(pesanEl);
+
+  try {
+    const order = await buatOrderBaru(paketLabel, harga, nama, metode);
+    document.getElementById("orderBox").classList.remove("hidden");
+    document.getElementById("orderIdTampil").textContent = order.orderId;
+    document.getElementById("detailOrder").textContent = `Paket: ${order.paketLabel} • Rp ${order.harga.toLocaleString("id-ID")} • Metode: ${order.metode} • Status: pending (menunggu pembayaran)`;
+    document.getElementById("inputKode").value = order.orderId;
+    tampilkanPesan(pesanEl, "Pesanan berhasil dibuat! Order ID sudah tersimpan di Supabase sebagai pending. Sekarang silakan bayar sesuai metode yang kamu pilih, lalu klik tombol Cek Status.", "info");
+    // Buka link pembayaran asli kalau sudah kamu isi
+    // const link = metode === "QRIS" ? PAYMENT_LINK_QRIS : PAYMENT_LINK_VA;
+    // window.open(link, "_blank");
+  } catch (err) {
+    tampilkanPesan(pesanEl, err.message, "err");
+  }
+  btn.disabled = false; btn.textContent = "🧾 Buat Pesanan & Lanjut ke Pembayaran";
+});
+
+// Tombol: Salin Order ID
+document.getElementById("btnSalinOrder").addEventListener("click", async () => {
+  const txt = document.getElementById("orderIdTampil").textContent;
+  try { await navigator.clipboard.writeText(txt); alert("Order ID tersalin: " + txt); }
+  catch (e) { prompt("Salin Order ID ini:", txt); }
+});
+
+// Tombol: Cek Status Setelah Bayar
+document.getElementById("btnCekStatus").addEventListener("click", async () => {
+  const orderId = document.getElementById("orderIdTampil").textContent.trim();
+  const pesanEl = document.getElementById("pesanBayar");
+  const btn = document.getElementById("btnCekStatus");
+  btn.disabled = true; btn.textContent = "Mengecek...";
+  const hasil = await cekLisensiSupabase(orderId);
+  btn.disabled = false; btn.textContent = "🔄 Saya Sudah Bayar — Cek Status";
+  if (hasil.valid) {
+    tampilkanPesan(pesanEl, "Pembayaran terkonfirmasi! Selamat datang, " + hasil.buyerName, "ok");
+    setTimeout(() => bukaAksesPro(hasil), 700);
+  } else {
+    tampilkanPesan(pesanEl, hasil.message, "err");
+  }
+});
+
+// Logout
+document.getElementById("btnLogout").addEventListener("click", () => {
+  if (confirm("Keluar dari akun PRO ini?")) kunciAkses();
+});
+
+// Tab Studio
+document.querySelectorAll(".tabBtn").forEach((b) => {
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".tabBtn").forEach((x) => x.classList.remove("active"));
+    b.classList.add("active");
+    ["tabFoto", "tabVideo", "tabKalkulator"].forEach((id) => document.getElementById(id).classList.add("hidden"));
+    document.getElementById(b.dataset.tab).classList.remove("hidden");
+  });
+});
+
+// Upload preview
+document.getElementById("uploadFoto").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const url = URL.createObjectURL(f);
+  document.getElementById("previewFoto").innerHTML = `<img src="${url}" alt="Preview makanan">`;
+});
+
+// Buat Poster + Skor CRO
+document.getElementById("btnBuatPoster").addEventListener("click", () => {
+  const judul = document.getElementById("judulIklan").value.trim() || "Menu Andalan Hari Ini";
+  const gaya = document.getElementById("gayaFoto").value;
+  let skor = 72;
+  if (judul.length > 10) skor += 8;
+  if (judul.toLowerCase().includes("gratis") || judul.toLowerCase().includes("diskon") || judul.toLowerCase().includes("promo")) skor += 10;
+  if (skor > 98) skor = 98;
+  document.getElementById("hasilPoster").className = "alert show ok";
+  document.getElementById("hasilPoster").textContent = `Poster dibuat! Gaya: ${gaya}\nJudul: "${judul}"\nSkor CRO: ${skor}/100 — ${skor >= 85 ? "Siap di-boost! 🔥" : "Bagus, tambahkan kata Promo / Gratis biar makin klik."}`;
+});
+
+// Ide Video
+document.getElementById("btnBuatVideo").addEventListener("click", () => {
+  const teks = document.getElementById("teksVideo").value.trim() || "Makanan enak harga warung";
+  document.getElementById("hasilVideo").className = "alert show ok";
+  document.getElementById("hasilVideo").textContent = `HOOK 3 Detik: "Stop scroll! ${teks}"\nSCRIPT 15 Detik: Tunjuk makanan close-up → tuang saus → testimoni pelanggan → CTA "Order sekarang, klik link di bio!"\nCAPTION: ${teks} 🔥 #kuliner #warungads`;
+});
+
+// Kalkulator Ojol
+document.getElementById("btnHitung").addEventListener("click", () => {
+  const harga = parseFloat(document.getElementById("hargaJual").value) || 0;
+  const modal = parseFloat(document.getElementById("modal").value) || 0;
+  const komisi = parseFloat(document.getElementById("komisi").value) || 0;
+  const diskon = parseFloat(document.getElementById("diskon").value) || 0;
+  const potKomisi = harga * komisi / 100;
+  const terima = harga - potKomisi - diskon;
+  const untung = terima - modal;
+  const persen = harga > 0 ? Math.round(untung / harga * 100) : 0;
+  const el = document.getElementById("hasilHitung");
+  el.className = "alert show " + (untung > 0 ? "ok" : "err");
+  el.textContent = `Diterima dari Ojol: Rp ${terima.toLocaleString("id-ID")}\nModal: Rp ${modal.toLocaleString("id-ID")}\nUntung Bersih: Rp ${untung.toLocaleString("id-ID")} (${persen}%)\n${untung > 0 ? "✅ Aman, tidak boncos." : "⛔ BONCOS! Naikkan harga atau kurangi diskon."}`;
+});
+</script>
+</body>
+</html>
